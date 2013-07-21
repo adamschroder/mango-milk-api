@@ -1,7 +1,23 @@
 class ShowsController < ApplicationController
 
   def index
-    render json: Show.all
+    if params[:search]
+
+      @shows = Show.search(params[:search])
+
+      if @shows
+        render json: @shows, status: 200
+      else
+        render json: {}, status: 422
+      end
+
+    else
+      # somtething else ..
+    end
+  end
+
+  def show
+    render json: Show.find(params[:id])
   end
 
   def show
