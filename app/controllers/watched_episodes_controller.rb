@@ -1,7 +1,7 @@
 class WatchedEpisodesController < ApplicationController
 
   respond_to :json
-
+  skip_before_filter :verify_authenticity_token
   def index
     render json: WatchedEpisode.where(user_id: params[:user_id])
   end
@@ -19,9 +19,15 @@ class WatchedEpisodesController < ApplicationController
   end
 
   def update
-
     watched_episode = WatchedEpisode.find(params[:episode_id])
     watched_episode.update_attributes(params[:episode_ids])
     render json: show
+  end
+
+  def destroy
+    #@show = WatchedEpisode.where(user_id: params[:user_id], show_id: params[:episode_id])
+    @show = WatchedEpisode.where(episode_id: params[:id], user_id: params[:user_id])
+    @show.destroy_all
+    render json: {}, status: 200
   end
 end

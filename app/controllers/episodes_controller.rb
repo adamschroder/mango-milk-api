@@ -1,7 +1,8 @@
 class EpisodesController < ApplicationController
 
   def index
-    render json: Episode.all
+    intId = Integer(params[:id])
+    render json: Episode.where({show_id: intId})
   end
 
   def show
