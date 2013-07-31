@@ -7,6 +7,8 @@ gem 'rails', '3.2.2'
 
 gem 'pg'
 
+gem 'yaml_db'
+
 gem 'httparty'
 
 gem 'json'
