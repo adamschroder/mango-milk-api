@@ -12,7 +12,7 @@ class ShowsController < ApplicationController
       end
 
     else
-      # somtething else ..
+      render json: Show.find(:all), status: 200
     end
   end
 
