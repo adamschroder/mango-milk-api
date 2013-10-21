@@ -22,7 +22,23 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.save
+    if @user.save
+      render json: {}, status: 200
+    else
+      render json: {}, status: 422
+    end
+  end
+
+  def login
+    puts params[:email]
+    puts params[:password]
+    authorized_user = User.authenticate(params[:email],params[:password])
+    puts authorized_user
+    if authorized_user
+      render json: {}, status 200
+    else
+      render json: {}, status 404
+    end
   end
 
   def update
